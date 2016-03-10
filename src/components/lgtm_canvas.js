@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-//import Exploder from 'exploder';
 import { Surface, Image, Text } from 'react-canvas';
 import { Encoder, Decoder } from 'readwrite-gif';
 import request from 'superagent';
@@ -45,7 +44,7 @@ export default class LgtmCanvas extends React.Component {
     for (let i = 0, len = decoder.numFrames(); i < len ; i++) {
       const frame = decoder.frameInfo(i);
       const imagedata = ctx.createImageData(imageWidth, imageHeight);
-      decoder.decodeAndBlitFrameRGBA(i, imagedata.data); // Decode 0th frame
+      decoder.decodeAndBlitFrameRGBA(i, imagedata.data);
       ctx.putImageData(imagedata, 0, 0);
       frames.push(assign({}, frame, { url: canvas.toDataURL() }));
       length += frame.delay;
@@ -68,7 +67,7 @@ export default class LgtmCanvas extends React.Component {
 
   animationLoop() {
     const { frames, length, started } = this.state;
-    if (frames, started) {
+    if (frames) {
       const now = (new Date).getTime();
       const offset = (now - started) % (10 * length);
       let frameIndex = 0;
