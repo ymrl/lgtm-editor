@@ -35,8 +35,7 @@ const EditorActions = {
       const imgElm = new window.Image();
       imgElm.src = params.url;
       imgElm.addEventListener('load', () => {
-        dispatchImage( params.url, params.fileType,
-          imgElm.naturalWidth, imgElm.naturalHeight );
+        dispatchImage( params.url, params.fileType, imgElm.naturalWidth, imgElm.naturalHeight );
       });
     }
   }
