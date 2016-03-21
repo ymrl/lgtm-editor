@@ -58,10 +58,36 @@
 
 	var _main_container2 = _interopRequireDefault(_main_container);
 
+	var _editor_actions = __webpack_require__(183);
+
+	var _editor_actions2 = _interopRequireDefault(_editor_actions);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	window.addEventListener('load', function () {
 	  _reactDom2.default.render(_react2.default.createElement(_main_container2.default), document.querySelector('#main'));
+	  document.body.addEventListener('paste', function (e) {
+	    var _loop = function _loop(i, l) {
+	      var item = e.clipboardData.items[i];
+	      if (/^image\//.test(item.type)) {
+	        (function () {
+	          var blob = item.getAsFile();
+	          var reader = new FileReader();
+	          reader.addEventListener('loadend', function () {
+	            _editor_actions2.default.setImage({
+	              url: reader.result,
+	              fileType: item.type
+	            });
+	          });
+	          reader.readAsDataURL(blob);
+	        })();
+	      }
+	    };
+
+	    for (var i = 0, l = e.clipboardData.items.length; i < l; i++) {
+	      _loop(i, l);
+	    }
+	  });
 	});
 
 /***/ },
